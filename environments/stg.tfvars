@@ -1,6 +1,6 @@
 alert_name                    = "ok_stg"
 alert_description             = "no descr"
-alert_search                  = "| makeresults 10"
+alert_search                  = "| makeresults 15 | stats count as total"
 alert_emails_to               = "yu@gamesys.co.uk"
 alert_type                    = "custom"
 alert_condition               = "search total > 11"

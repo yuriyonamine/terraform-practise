@@ -25,6 +25,7 @@ resource "splunk_saved_searches" "syslog_alert" {
   action_email_include_trigger      = 1
   action_email_include_trigger_time = 1
   action_email_include_view_link    = 1
+  action_webhook_param_url          = "https://url"
   acl {
     owner   = "nobody"
     sharing = "app"
