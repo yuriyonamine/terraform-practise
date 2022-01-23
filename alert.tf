@@ -1,35 +1,22 @@
-resource "splunk_saved_searches" "syslog_alert" {
-  provider = splunk.backend
 
-  name                              = var.alert_name
-  description                       = var.alert_description
-  search                            = var.alert_search
-  disabled                          = false
-  is_scheduled                      = true
-  is_visible                        = true
-  realtime_schedule                 = false
-  actions                           = var.alert_actions
-  action_email_format               = "table"
-  action_email_to                   = var.alert_emails_to
-  alert_comparator                  = var.alert_comparator
-  alert_condition                   = var.alert_condition
-  alert_digest_mode                 = true
-  alert_expires                     = var.alert_expire_time
-  alert_threshold                   = var.alert_treshold
-  alert_type                        = var.alert_type
-  cron_schedule                     = var.alert_cron_schedule
-  dispatch_earliest_time            = var.alert_search_range_start_time
-  dispatch_latest_time              = var.alert_search_range_end_time
-  action_email_include_search       = 1
-  action_email_include_results_link = 1
-  action_email_include_trigger      = 1
-  action_email_include_trigger_time = 1
-  action_email_include_view_link    = 1
-  action_webhook_param_url          = "https://url"
-  acl {
-    owner   = "nobody"
-    sharing = "app"
-    app     = "search"
-    read    = ["*"]
+module "bingo_system_generic" {
+  source = "./modules/bingo_alert"
+  providers = {
+    splunk.be = splunk.backend
   }
+
+  alert_name                    = "ok1"
+  alert_description             = "no descr"
+  alert_search                  = "| makeresults count=15 | stats count as total"
+  alert_emails_to               = "yu@hotmail.com,yu@gmail.com"
+  alert_type                    = "custom"
+  alert_condition               = "search total > 11"
+  alert_comparator              = "greater than"
+  alert_expire_time             = "30d"
+  alert_treshold                = "0"
+  alert_cron_schedule           = "*/1 * * * *"
+  alert_search_range_start_time = "-20m"
+  alert_search_range_end_time   = "now"
+  alert_actions                 = "email,webhook"
+  alert_webhook_param_url       = "https://url"
 }
