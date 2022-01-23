@@ -26,6 +26,7 @@ variable "alert_type" {
 variable "alert_condition" {
   type        = string
   description = "Condition used to decide if the alert will be triggered or not."
+  default = ""
 }
 
 variable "alert_comparator" {
@@ -66,4 +67,5 @@ variable "alert_actions" {
 variable "alert_webhook_param_url" {
   type        = string
   description = "URL where Splunk will send the alert notification"
+  default = null
 }

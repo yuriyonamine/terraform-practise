@@ -1,0 +1,5 @@
+system_generic_errors_alert_create=1
+system_aggregator_errors_alert_create=0
+
+fe_system_generic_errors_alert_create=1
+fe_system_aggregator_errors_alert_create=1
