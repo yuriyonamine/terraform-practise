@@ -3,14 +3,11 @@ terraform {
     splunk = {
       source  = "splunk/splunk"
       version = "1.4.9"
-#      configuration_aliases = [ splunk.be ]
     }
   }
 }
 
 resource "splunk_saved_searches" "alert" {
- # provider = splunk.be
-
   name                              = var.alert_name
   description                       = var.alert_description
   search                            = var.alert_search
