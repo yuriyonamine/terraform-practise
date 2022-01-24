@@ -25,6 +25,10 @@ set TF_VAR_frontend_splunk_url='localhost:8089'
 set TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
 set TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
 ```
+- Initialise the project working directory. (Execute the following command from the root folder) 
+```
+- terraform init
+```
 - Select an workspace
 ```
 terraform workspace select dev_one
