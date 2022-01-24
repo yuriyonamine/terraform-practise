@@ -6,7 +6,7 @@ All data stored in the State file is kept in plain text.
 If we include any sensitive data to the state, we have to save it to a remote location with limited access. This can be achieved using a different "Terraform Backend" (https://www.terraform.io/language/settings/backends)
 
 - [Requirements](#requirements)
-- [Local test](#local-test)
+- [Local testing](#local-testing)
   - [Create resources](#create-resources)
   - [Destroy resources](#destroy-resources)
   - [Pipelines configuration (to be automated)](#pipelines-configuration-to-be-automated)
@@ -15,7 +15,7 @@ If we include any sensitive data to the state, we have to save it to a remote lo
 - Terraform
 - Docker
 
-## Local test
+## Local testing
 ### Create resources
 - Spin up a Splunk instance. This step is required if you want to test it against a local Splunk
 ```
@@ -27,8 +27,6 @@ curl -k -u Admin:Password1 -X POST https://localhost:8089/services/authorization
 ```
 - Set environment variables (replace the _REPLACE_HERE_WITH_THE_API_TOKEN_ with the token generated in the previous step)
 ```
-set TF_VAR_backend_splunk_url='localhost:8089'
-set TF_VAR_frontend_splunk_url='localhost:8089'
 set TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
 set TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
 ```
@@ -38,7 +36,7 @@ terraform init
 ```
 - Create the resources on Splunk
 ```
-terraform apply -var-file='environments/local.tfvars'
+terraform apply -var-file='environments/local.tfvars' -auto-approve
 ```
 
 ### Destroy resources
@@ -51,8 +49,6 @@ terraform destroy -var-file='environments/local.tfvars'
 
 - Set environment variables (replace the REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND and REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND with the token provided by PEG)
 ```
-set TF_VAR_backend_splunk_url='localhost:8089'
-set TF_VAR_frontend_splunk_url='localhost:8089'
 set TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND'
 set TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND'
 ```
@@ -70,5 +66,5 @@ terraform workspace select prod
 ```
 - Create the resources on Splunk
 ```
-terraform apply -var-file='environments/prod.tfvars'
+terraform apply -var-file='environments/prod.tfvars' -auto-approve
 ```
