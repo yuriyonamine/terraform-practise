@@ -1,9 +1,10 @@
-# terraform-practise
-Project to manage Splunk alerts and Dashboards accross different environments
 
 # WARNING
 All data stored in the **_State_** file is kept in plain text. 
 If we include any sensitive data to the _**State**_, we have to save it to a remote location with limited access. This can be achieved using a different [_Terraform Backend_ ](https://www.terraform.io/language/settings/backends)
+
+# terraform-practise
+Project to manage Splunk alerts and Dashboards accross different environments
 
 - [Requirements](#requirements)
 - [Local testing](#local-testing)
@@ -12,6 +13,7 @@ If we include any sensitive data to the _**State**_, we have to save it to a rem
   - [Pipelines configuration (to be automated)](#pipelines-configuration-to-be-automated)
   - [Include new environment](#include-new-environment)
   - [Exposing new Alert module property](#exposing-new-alert-module-property)
+
 ## Requirements
 - Terraform
 - Docker
