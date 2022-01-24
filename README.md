@@ -1,15 +1,19 @@
 # terraform-practise
 This project bla bla
 
+# WARNING
+All data stored in the State file is kept in plain text. 
+If we include any sensitive data to the state, we have to save it to a remote location with limited access. This can be achieved using a different "Terraform Backend" (https://www.terraform.io/language/settings/backends)
+
+- [Requirements](#requirements)
+- [Create resources](#create-resources)
+- [Destroy resources](#destroy-resources)
+
 ## Requirements
 - Terraform
 - Docker
 
-## WARNING
-All data stored in the State file is kept in plain text. 
-If we include any sensitive data to the state, we have to save it to a remote location with limited access. This can be achieved using a different "Terraform Backend" (https://www.terraform.io/language/settings/backends)
-
-## How to test 
+## Create resources 
 - (Optional) Spin up a Splunk instance. This step is required if you want to test it against a local Splunk
 ```
 docker run -d -p 8000:8000 -p 8089:8089 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PASSWORD='Password1' splunk/splunk:latest
