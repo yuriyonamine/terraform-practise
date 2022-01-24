@@ -1,5 +1,5 @@
 # terraform-practise
-This project bla bla
+Project to manage Splunk alerts and Dashboards accross different environments
 
 # WARNING
 All data stored in the **_State_** file is kept in plain text. 
@@ -48,7 +48,7 @@ terraform destroy -var-file='environments/local.tfvars'
 
 ## Pipelines configuration (to be automated)
 
-- Set environment variables (replace the _**REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND**_ and _**REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND**_ with the token provided by PEG)
+- Set environment variables (replace the _**REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND**_ and _**REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND**_ with the token provided by X)
 ```
 set TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND'
 set TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND'
