@@ -1,46 +1,42 @@
 # terraform-practise
-WARNING
+This project bla bla
+
+## Requirements
+- Terraform
+- Docker
+
+## WARNING
 All data stored in the State file is kept in plain text. 
-If we include any sensitive data to the state, we have to save it to a remote location with limited access. This can be achieved using a different "Terraform Backend" https://www.terraform.io/language/settings/backends
- 
-fmt before run
-workspace navigation
-configured through variables
-providers
-Split environments
-how to test
-how to run
-requirements
+If we include any sensitive data to the state, we have to save it to a remote location with limited access. This can be achieved using a different "Terraform Backend" (https://www.terraform.io/language/settings/backends)
 
-Create a workspaces per environment 
-terraform workspace create dev_one
-terraform workspace create dev_two
-terraform workspace create stg_one
-terraform workspace create stg_two
-terraform workspace create prod_one
-terraform workspace create prod_two
-
-
-
-Execution
-Set environment variables
-
-$env:TF_VAR_backend_splunk_url='localhost:8089'
-$env:TF_VAR_frontend_splunk_url='localhost:8089'
-$env:TF_VAR_backend_splunk_access_token='eyJraWQiOiJzcGx1bmsuc2VjcmV0IiwiYWxnIjoiSFM1MTIiLCJ2ZXIiOiJ2MiIsInR0eXAiOiJzdGF0aWMifQ.eyJpc3MiOiJhZG1pbiBmcm9tIGIyMjczOTVjMGFhZCIsInN1YiI6ImFkbWluIiwiYXVkIjoiQmluZ28gQ2hlY2siLCJpZHAiOiJTcGx1bmsiLCJqdGkiOiJjMWEyOGM1MmJkNzMzYTJkN2I5MzE0Mjc2ODg1ZjExOTBjYTNmNmVmMmZkNjlkZTA2ZGY1ODgxZDZlMDFjMDkwIiwiaWF0IjoxNjQyNjcxNDIxLCJleHAiOjE2NDUyNjM0MjEsIm5iciI6MTY0MjY3MTQyMX0.7WdUoUlmOMAXTFTeZ008d7vEAQj2Mzcl7omDVsGGv4frWskl6GTapF6A7s-HytGXrZZpM_-LuAqzu7Rx1yWnQg'
-$env:TF_VAR_frontend_splunk_access_token='eyJraWQiOiJzcGx1bmsuc2VjcmV0IiwiYWxnIjoiSFM1MTIiLCJ2ZXIiOiJ2MiIsInR0eXAiOiJzdGF0aWMifQ.eyJpc3MiOiJhZG1pbiBmcm9tIGIyMjczOTVjMGFhZCIsInN1YiI6ImFkbWluIiwiYXVkIjoiQmluZ28gQ2hlY2siLCJpZHAiOiJTcGx1bmsiLCJqdGkiOiJjMWEyOGM1MmJkNzMzYTJkN2I5MzE0Mjc2ODg1ZjExOTBjYTNmNmVmMmZkNjlkZTA2ZGY1ODgxZDZlMDFjMDkwIiwiaWF0IjoxNjQyNjcxNDIxLCJleHAiOjE2NDUyNjM0MjEsIm5iciI6MTY0MjY3MTQyMX0.7WdUoUlmOMAXTFTeZ008d7vEAQj2Mzcl7omDVsGGv4frWskl6GTapF6A7s-HytGXrZZpM_-LuAqzu7Rx1yWnQg'
-
-Select and Apply a configuration to one environment
+## How to test 
+- (Optional) Spin up a Splunk instance. This step is required if you want to test it against a local Splunk
+```
+docker run -d -p 8000:8000 -p 8089:8089 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PASSWORD='Password1' splunk/splunk:latest
+```
+- Create an API token
+```
+curl -k -u Admin:Password1 -X POST https://localhost:8089/services/authorization/tokens?output_mode=json --data name=Admin --data audience=Creation --data type=static
+```
+- Set environment variables (replace the _REPLACE_HERE_WITH_THE_API_TOKEN_ with the token generated in the previous step)
+```
+set TF_VAR_backend_splunk_url='localhost:8089'
+set TF_VAR_frontend_splunk_url='localhost:8089'
+set TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
+set TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
+```
+- Select an workspace
+```
 terraform workspace select dev_one
+```
+- Create the resources on Splunk
+```
 terraform apply -var-file='environments/dev_one.tfvars'
+```
 
-terraform workspace select stg_one
-terraform apply -var-file='environments/stg_one.tfvars'  
-...
-
-
-Destroy resources for an environment
-
-terraform workspace select stg_one
-terraform destroy -var-file='environments/stg_one.tfvars'  
+## Destroy resources
+- Create the resources on Splunk
+```
+terraform destroy -var-file='environments/dev_one.tfvars'
+```
 
