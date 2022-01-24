@@ -71,5 +71,9 @@ terraform apply -var-file='environments/prod.tfvars' -auto-approve
 ```
 
 ## Include new environment
-- Create a file to hold the properties for the new environment in [here](/blob/main/environments/)
+- Create a file to hold the properties for the new environment in [here](/environments/)
 - Include the new environment to the pipeline
+
+## Add new Splunk module property
+The Alert module sets few properties that are common to all of our alerts. You can find them hardcoded in [here](/modules/bingo_alert/main.tf).
+In case you need to make them customizable (per environment or per alert), you can define a new variable in [here](/modules/bingo_alert/variables.tf) and set it in the previous file. After that, the new varianble will be available to be configured in your alerts.
