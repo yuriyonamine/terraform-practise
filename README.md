@@ -10,6 +10,7 @@ If we include any sensitive data to the state, we have to save it to a remote lo
   - [Create resources](#create-resources)
   - [Destroy resources](#destroy-resources)
   - [Pipelines configuration (to be automated)](#pipelines-configuration-to-be-automated)
+  - [Include new environment](#include-new-environment)
 
 ## Requirements
 - Terraform
@@ -68,3 +69,7 @@ terraform workspace select prod
 ```
 terraform apply -var-file='environments/prod.tfvars' -auto-approve
 ```
+
+## Include new environment
+- Create a file to hold the properties for the new environment in [here](/blob/main/environments/)
+- Include the new environment to the pipeline
