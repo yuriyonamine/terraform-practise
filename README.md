@@ -24,9 +24,13 @@ Project to manage Splunk alerts and Dashboards accross different environments
 ```
 docker run -d -p 8000:8000 -p 8089:8089 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PASSWORD='Password1' splunk/splunk:latest
 ```
+- Enable the API token authentication
+```
+curl -k -u "Admin:Password1" -X POST https://docker.host:8089/services/admin/token-auth/tokens_auth -d disabled=false
+```
 - Create an API token
 ```
-curl -k -u Admin:Password1 -X POST https://localhost:8089/services/authorization/tokens?output_mode=json --data name=Admin --data audience=Creation --data type=static
+curl -k -u Admin:Password1 -X POST https://docker.host:8089/services/authorization/tokens?output_mode=json --data name=Admin --data audience=Creation --data type=static
 ```
 - Set environment variables (replace the _**REPLACE_HERE_WITH_THE_API_TOKEN**_ with the token generated in the previous step)
 ```
