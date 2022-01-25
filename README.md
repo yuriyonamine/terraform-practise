@@ -15,9 +15,9 @@ Project to manage Splunk alerts and Dashboards accross different environments
   - [Exposing new Alert module property](#exposing-new-alert-module-property)
 
 ## Requirements
-- Terraform
-- Docker
-- jq library
+- Terraform (brew tap hashicorp/tap;brew install hashicorp/tap/terraform)
+- Docker (brew install docker)
+- jq library (brew install jq)
 
 ## Local testing
 ### Create resources
