@@ -30,12 +30,12 @@ curl -k -u "Admin:Password1" -X POST https://docker.host:8089/services/admin/tok
 ```
 - Create an API token
 ```
-curl -k -u Admin:Password1 -X POST https://docker.host:8089/services/authorization/tokens?output_mode=json --data name=Admin --data audience=Creation --data type=static
+curl -k -u "Admin:Password1" -X POST https://docker.host:8089/services/authorization/tokens?output_mode=json --data name=Admin --data audience=Creation --data type=static
 ```
 - Set environment variables (replace the _**REPLACE_HERE_WITH_THE_API_TOKEN**_ with the token generated in the previous step)
 ```
-set TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
-set TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
+export TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
+export TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
 ```
 - Initialise the project working directory. (Execute the following command from the root folder) 
 ```
@@ -56,8 +56,8 @@ terraform destroy -var-file='environments/local.tfvars'
 
 - Set environment variables (replace the _**REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND**_ and _**REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND**_ with the token provided by X)
 ```
-set TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND'
-set TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND'
+export TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND'
+export TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND'
 ```
 - Initialise the project working directory. (Execute the following command from the root folder) 
 ```
