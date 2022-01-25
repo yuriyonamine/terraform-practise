@@ -17,30 +17,24 @@ Project to manage Splunk alerts and Dashboards accross different environments
 ## Requirements
 - Terraform
 - Docker
+- jq library
 
 ## Local testing
 ### Create resources
-- Spin up a Splunk instance. This step is required if you want to test it against a local Splunk
+- Execute the following bash script. The script will:
+  - Spin up a local Splunk container
+  - Enable the Splunk API token authentication in order to generate API tokens
+  - Create an API token
+  - Set the environment variable containing the Splunk API Token and Splunk Host IP (these variables will be used to configure the Terraform Providers)
 ```
-docker run -d -p 8000:8000 -p 8089:8089 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PASSWORD='Password1' splunk/splunk:latest
+source setup.sh
 ```
-- Enable the API token authentication
-```
-curl -k -u "Admin:Password1" -X POST https://docker.host:8089/services/admin/token-auth/tokens_auth -d disabled=false
-```
-- Create an API token
-```
-curl -k -u Admin:Password1 -X POST https://docker.host:8089/services/authorization/tokens?output_mode=json --data name=Admin --data audience=Creation --data type=static
-```
-- Set environment variables (replace the _**REPLACE_HERE_WITH_THE_API_TOKEN**_ with the token generated in the previous step)
-```
-set TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
-set TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN'
-```
+
 - Initialise the project working directory. (Execute the following command from the root folder) 
 ```
 terraform init
 ```
+
 - Create the resources on Splunk
 ```
 terraform apply -var-file='environments/local.tfvars' -auto-approve
@@ -56,8 +50,8 @@ terraform destroy -var-file='environments/local.tfvars'
 
 - Set environment variables (replace the _**REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND**_ and _**REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND**_ with the token provided by X)
 ```
-set TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND'
-set TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND'
+export TF_VAR_backend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_BACKEND'
+export TF_VAR_frontend_splunk_access_token='REPLACE_HERE_WITH_THE_API_TOKEN_FRONTEND'
 ```
 - Initialise the project working directory. (Execute the following command from the root folder) 
 ```

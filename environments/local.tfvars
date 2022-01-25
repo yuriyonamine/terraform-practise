@@ -1,6 +1,3 @@
-backend_splunk_url="localhost:8089"
-frontend_splunk_url="localhost:8089"
-
 system_generic_errors_alert_create=1
 system_aggregator_errors_alert_create=0
 
