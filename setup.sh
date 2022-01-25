@@ -36,7 +36,7 @@ echo "- Creating new authentication API token"
 while [ -z "$api_token" ] || [ "$api_token" = "null" ]
 do
     sleep 5;
-    api_token=$(curl -s -k -u Admin:Password1 -X POST https://$docker_host_ip:8089/services/authorization/tokens?output_mode=json --data name=Admin --data audience=Creation --data type=static | jq -r .entry[0].content.token)
+    api_token=$(curl -s -k -u "Admin:Password1" -X POST "https://$docker_host_ip:8089/services/authorization/tokens?output_mode=json" --data name=Admin --data audience=Creation --data type=static | jq -r .entry[0].content.token)
     echo $api_token
 done
 ###########################################
