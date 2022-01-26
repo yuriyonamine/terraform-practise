@@ -48,3 +48,6 @@ export TF_VAR_frontend_splunk_access_token="$api_token"
 export TF_VAR_backend_splunk_url="$docker_host_ip:8089"
 export TF_VAR_frontend_splunk_url="$docker_host_ip:8089"
 #############################################
+
+
+echo "Access Splunk on https://$docker_host_ip:8000"
