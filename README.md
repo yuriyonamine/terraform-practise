@@ -40,7 +40,12 @@ terraform init
 terraform apply -var-file='environments/local.tfvars' -auto-approve
 ```
 
-- Access Splunk on port 8000 https://<PLACE_YOUR_MINIKUBE_IP_HERE>:8000 (Minikube) or https://localhost:8000 (Docker Desktop)
+- Access Splunk on port 8000
+```
+ https://<PLACE_YOUR_MINIKUBE_IP_HERE>:8000 (Minikube) 
+ or 
+ https://localhost:8000 (Docker Desktop)
+```
 
 ### Destroy resources
 - Destroy the resources on Splunk
